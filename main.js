@@ -5,11 +5,11 @@ import {activeWindow} from 'get-windows';
 let mainWindow, toolboxWindow;
 
 app.whenReady().then(() => {
-  mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: { nodeIntegration: true },
-  });
+  // mainWindow = new BrowserWindow({
+  //   width: 800,
+  //   height: 600,
+  //   webPreferences: { nodeIntegration: true },
+  // });
 
   toolboxWindow = new BrowserWindow({
     width: 200,
@@ -29,7 +29,8 @@ app.whenReady().then(() => {
   
       const display = screen.getPrimaryDisplay();
       const { width: screenWidth, height: screenHeight } = display.bounds;
-      const scaleFactor = display.scaleFactor;
+      const scaleFactor = win.platform === "macos" ? 1 : display.scaleFactor;
+      console.log(scaleFactor, "scaleFactor");
   
       let newX = Math.round((win.bounds.x + win.bounds.width) / scaleFactor);
       let newY = Math.round(win.bounds.y / scaleFactor);
